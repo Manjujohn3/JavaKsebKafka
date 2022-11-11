@@ -195,9 +195,46 @@ public class Admin {
                     break;
                 case 7:
                     System.out.println("view bill");
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksebdb","root","");
+                        String sql = "SELECT  b.`consumerid`, b.`month`, b.`year`, b.`bill`, b.`paidstatus`, b.`billdate`, b.`totalunit`, b.`duedate`, b.`invoice`,c.consumerid,c.name FROM `bills` b JOIN consumer c ON b.consumerid=c.id";
+                        Statement stmt = con.createStatement();
+                        ResultSet rs = stmt.executeQuery(sql);
+                        while (rs.next()){
+                            String getConsumerId = rs.getString("consumerid");
+                            String getMonth= rs.getString("month");
+                            String getYear = rs.getString("year");
+                            String getBill = rs.getString("bill");
+                            String getPaidStatus = rs.getString("paidstatus");
+                            String getbilldate = rs.getString("billdate");
+                            String getTotalUnit = rs.getString("totalunit");
+                            String getDueDate = rs.getString("duedate");
+                            String getInvoice = rs.getString("invoice");
+                            String getConsumerCode = rs.getString("consumerid");
+                            String getConsumerName = rs.getString("name");
+                            System.out.println("Consumer Id="+getConsumerId);
+                            System.out.println("Month="+getMonth);
+                            System.out.println("Year="+getYear);
+                            System.out.println("Bill ="+getBill);
+                            System.out.println("PaidStatus ="+getPaidStatus);
+                            System.out.println("Bill Date ="+getbilldate);
+                            System.out.println("Total Unit ="+getTotalUnit);
+                            System.out.println("Due Date ="+getDueDate);
+                            System.out.println("Invoice ="+getInvoice);
+                            System.out.println("Consumer Code ="+getConsumerCode);
+                            System.out.println("Consumer Name="+getConsumerName+"\n");
+                        }
+
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
+
                     break;
                 case 8:
                     System.out.println("Top 2 high bill");
+
                     break;
                 case 9:
                     System.exit(0);
