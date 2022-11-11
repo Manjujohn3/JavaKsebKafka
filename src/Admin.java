@@ -53,6 +53,31 @@ public class Admin {
                     break;
                 case 2:
                     System.out.println("search consumer selected");
+                    System.out.println("Enter the Consumer Code/Name/Phone to search: ");
+                    String searchOption = sc.next();
+                    try {
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksebdb", "root", "");
+                        String sql = "SELECT `consumerid`, `name`, `address`, `phone`, `email` FROM `consumer` WHERE `consumerid` ='"+searchOption+"'  OR `name`='"+searchOption+"' OR `phone` ='"+searchOption+"' ";
+                        Statement stmt = con.createStatement();
+                        ResultSet rs = stmt.executeQuery(sql);
+                        while (rs.next()){
+                            String getConsumerid = rs.getString("consumerid");
+                            String getName = rs.getString("name");
+                            String getConsumerAddress = rs.getString("address");
+                            String getConsumerPhone = rs.getString("phone");
+                            String getConsumerEmail = rs.getString("email");
+
+                            System.out.println("Consumer Code="+getConsumerid);
+                            System.out.println("Consumer Name="+getName);
+                            System.out.println("Consumer Phone="+getConsumerPhone);
+                            System.out.println("Consumer Email="+getConsumerEmail);
+                            System.out.println("Consumer Address="+getConsumerAddress);
+                        }
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
                     break;
                 case 3:
                     System.out.println("delete consumer selected");
