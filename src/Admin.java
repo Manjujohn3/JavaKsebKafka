@@ -97,6 +97,23 @@ public class Admin {
                     break;
                 case 4:
                     System.out.println("update consumer selected");
+                    consumerid = sc.nextInt();
+                    name = sc.next();
+                    address = sc.next();
+                    phone = sc.next();
+                    email = sc.next();
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksebdb", "root", "");
+                        String sql = "UPDATE `consumer` SET `consumerid`='"+consumerid+"',`name`='"+name+"',`Address`='"+address+"',`Phone`='"+phone+"',`Email`='"+email+"' WHERE `consumerid`='"+consumerid+"'";
+                        Statement stmt = con.createStatement();
+                        stmt.executeUpdate(sql);
+                        System.out.println("Updated successfully");
+
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
                     break;
                 case 5:
                     System.out.println("view all consumer selected");
