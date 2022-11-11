@@ -117,6 +117,30 @@ public class Admin {
                     break;
                 case 5:
                     System.out.println("view all consumer selected");
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksebdb","root","");
+                        String sql="SELECT `id`, `consumerid`, `name`, `address`, `phone`, `email` FROM `consumer`";
+                        Statement stmt = con.createStatement();
+                        ResultSet rs= stmt.executeQuery(sql);
+                        while (rs.next()){
+                            String getconsumerid=rs.getString("consumerid");
+                            String getname=rs.getString("name");
+                            String getaddress=rs.getString("address");
+                            String getphone=rs.getString("phone");
+                            String getemail=rs.getString("email");
+
+                            System.out.println("consumerid="+getconsumerid);
+                            System.out.println("name="+getname);
+                            System.out.println("address="+getaddress);
+                            System.out.println("phone="+getphone);
+                            System.out.println("email="+getemail);
+                        }
+
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
                     break;
                 case 6:
                     System.out.println("generate bill");
