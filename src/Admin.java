@@ -81,6 +81,19 @@ public class Admin {
                     break;
                 case 3:
                     System.out.println("delete consumer selected");
+                    consumerid = sc.nextInt();
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksebdb", "root", "");
+                        String sql = "DELETE FROM `consumer` WHERE `consumerid`='"+consumerid+"'";
+                        Statement stmt = con.createStatement();
+                        stmt.executeUpdate(sql);
+                        System.out.println("deleted successfully");
+
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
                     break;
                 case 4:
                     System.out.println("update consumer selected");
