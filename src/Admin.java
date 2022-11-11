@@ -234,8 +234,28 @@ public class Admin {
                     break;
                 case 8:
                     System.out.println("Top 2 high bill");
-
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksebdb", "root", "");
+                        String sql = "SELECT c.name,c.address,b.`bill`, b.`totalunit` FROM `bills` b JOIN consumer c ON b.consumerid=c.id ORDER BY b.`bill`DESC LIMIT 2";
+                        Statement stmt = con.createStatement();
+                        ResultSet rs = stmt.executeQuery(sql);
+                        while(rs.next()){
+                            name = rs.getString("c.name");
+                            address = rs.getString("c.address");
+                            int bill = rs.getInt("b.bill");
+                            int total = rs.getInt("totalunit");
+                            System.out.println("name ="+name);
+                            System.out.println("address ="+address);
+                            System.out.println("total bill = "+bill);
+                            System.out.println("total unit ="+total+'\n');
+                        }
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
                     break;
+
                 case 9:
                     System.exit(0);
                     break;
